@@ -11,4 +11,10 @@ describe "Deck" do
       end
     end
   end
+  
+  it "can shuffle the deck" do
+    deck = Deck.new
+    deck.pile.expects(:shuffle!)
+    deck.shuffle!
+  end
 end

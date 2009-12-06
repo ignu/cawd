@@ -17,6 +17,10 @@ class Deck
     end
   end
   
+  def shuffle!
+    pile.shuffle!
+  end
+  
 end
 
 class Card
