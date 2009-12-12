@@ -1,6 +1,7 @@
 class Player
-  self.add_action(method_name, &block)
-    send :define_method, method_name, block
+  
+  def self.add_action(method_name, &block)
+    define_method method_name, block
   end
   
 end
