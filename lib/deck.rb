@@ -4,14 +4,14 @@ class Deck
   def self.suits 
     [:clubs, :spades, :hearts, :diamonds]
   end
-  def self.values
+  def self.faces
     %w{2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A}
   end
   
   def initialize
     @pile = []
     Deck.suits.each do |suit|
-      Deck.values.each do |value|
+      Deck.faces.each do |value|
         pile << Card.new(value, suit)
       end
     end
@@ -21,14 +21,4 @@ class Deck
     pile.shuffle!
   end
   
-end
-
-class Card
-  attr_accessor :value, :suit
-  
-  def initialize (val, suit)
-    @value = val
-    @suit = suit
-  end
-     
 end
