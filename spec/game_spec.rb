@@ -8,5 +8,9 @@ describe Game do
     Dealer.player.should == false
   end
   
-
+  it "should load a game from a file" do
+    file_contents = ['x']
+    Game.expects(:parse).with(file_contents)
+    Game.load_file "blackjack"
+  end
 end

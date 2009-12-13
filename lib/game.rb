@@ -4,4 +4,6 @@ class Game
     return Game.new
   end
   
+  def self.load_file(filename)
+  end
 end

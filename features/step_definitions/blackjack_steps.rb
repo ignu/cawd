@@ -1,5 +1,5 @@
 Given /^the rules for 'blackjack'$/ do
-  @game = Game.new 'blackjack'
+  @game = Game.load 'blackjack'
 end
 
 When /^the dealer deals$/ do
