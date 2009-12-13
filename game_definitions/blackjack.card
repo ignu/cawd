@@ -1,6 +1,21 @@
 Dealer.player = false
 
+Game.add_round do 
+  deal players 1.up
+  deal dealer 1.down
+  deal all 1.up
+end
+
 <<eos
+
+add_round do
+  players.each {|p| p.bet}
+  deal players 1.up
+  deal dealer 1.down
+  deal all 1.up
+end
+
+
 add_round do
   players.each {|p| p.bet}
   deal players 1.up
