@@ -1,5 +1,6 @@
-dealer.player = false
+Dealer.player = false
 
+<<eos
 add_round do
   players.each {|p| p.bet}
   deal players 1.up
@@ -34,3 +35,4 @@ end
 dealer.turn do
   deal dealer 1.up until dealer.hand.total >= 17
 end
+eos

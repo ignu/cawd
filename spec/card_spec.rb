@@ -1,5 +1,4 @@
-
-require(File.join(File.dirname(__FILE__), 'lib', 'player'))
+require File.dirname(__FILE__) + '/spec_helper'
 describe "Card" do
   
   it "can get the value of a card" do
