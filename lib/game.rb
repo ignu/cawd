@@ -1,11 +1,23 @@
 class Game
-  def self.parse(code)
-    eval code
-    return Game.new
+  
+  attr_accessor :dealer
+  
+  class << self
+    def parse(code)
+      return Game.new code
+    end
+
+    def load(filename)
+      file = File.join(File.dirname(__FILE__), '..', 'game_definitions', filename + '.card')
+      parse IO.read(file)
+    end
   end
   
-  def self.load(filename)
-    file = File.join(File.dirname(__FILE__), '..', 'game_definitions', filename + '.card')
-    parse IO.read(file)
+  def initialize(code)
+    @dealer = Dealer.new
+    eval code
+  end
+
+  def add_round
   end
 end
