@@ -2,11 +2,17 @@ require(File.join(File.dirname(__FILE__), '.', 'spec_helper'))
 
 describe Game do
   
-  it "should load a game from a file" do
-    file_contents = ['x']
-    IO.expects(:read).returns(file_contents)
-    Game.expects(:parse).with(file_contents)
-    Game.load "blackjack"
+  describe "should load a game from a file" do
+    before(:each) do
+      file_contents = 'puts ""'
+      IO.expects(:read).returns(file_contents)
+      #Game.expects(:parse).with(file_contents)  TODO: find a good way to test this
+      Game.load "blackjack"
+    end
+    
+    it "should subclass game based on the provided filename" do
+      Blackjack.new.should be_kind_of(:game)
+    end
   end
   
   describe "when parsing the rules for the game" do
