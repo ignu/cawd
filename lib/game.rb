@@ -1,39 +1,42 @@
-class Game
+def load_game(filename)
+  file = File.join(File.dirname(__FILE__), '..', 'game_definitions', filename + '.card')
+  filename.capitalize!
+  klass = Class.new(Game)
+  Object.const_set(filename, klass)
+  klass = Object.const_get(filename)
+  klass.parse(IO.read(file))
+end
+
+
+class Game 
   
-  attr_accessor :dealer
-  
+  def dealer
+    @@dealer
+  end
+
   class << self
     
-    def inherited(a)
-      puts "inheirted by (#{a})"
-      puts a.new.class
-      puts a.class
+    def dealer
+      @@dealer ||= Dealer.new
     end
     
     def load(filename)
-      
       file = File.join(File.dirname(__FILE__), '..', 'game_definitions', filename + '.card')
-      filename = filename.to_pascal
-      x = eval("class #{filename} < Game\n end")
-      game = Object.const_get(
-      filename)
-      
-      game.parse(IO.read(file))
+      filename.capitalize!
+      klass = Class.new(Game)
+      Object.const_set(filename, klass)
+      klass = Object.const_get(filename)
+      klass.parse(IO.read(file))
+    
     end
     
     def parse(code)
       eval code
     end
+    
   end # end class variables
   
-  def initialize
-    @dealer = Dealer.new
-  end
-  
-  
-  
   private 
-
 
   def add_round
   end

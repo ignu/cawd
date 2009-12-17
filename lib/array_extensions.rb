@@ -14,9 +14,3 @@ class Array
     dup.shuffle!
   end
 end
-
-class String
-  def to_pascal
-    self.gsub(/^[a-z]|\s+[a-z]/) { |a| a.upcase }
-  end
-end

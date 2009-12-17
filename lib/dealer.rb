@@ -5,7 +5,6 @@ class Dealer
   end
   def player=(value)
     @player = value
-    puts @player
   end
   
   def initialize
