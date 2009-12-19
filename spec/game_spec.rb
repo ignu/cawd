@@ -30,15 +30,10 @@ describe Game do
     end
     
     it "should be able to define actions for a round" do
-      Argh.parse 'add_round { puts self; dealer= 3}'
-      Argh.new.next_round
-      Argh.dealer.should == 3
-    end
-    
-    
-    it "should be able to define actions for a round" do
-      Argh.parse 'add_round {puts self}'
-      Argh.new.next_round
+      Argh.parse 'add_round { @dealer = 3}'
+      game = Argh.new
+      game.next_round
+      game.dealer.should == 3
     end
     
   end
