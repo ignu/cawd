@@ -1,12 +1,12 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "../../", "cawd"))
 
 Given /^the rules for 'blackjack'$/ do
-  @blackjack = Game.load 'blackjack'
+  Game.load 'blackjack'
+  @blackjack = Blackjack.new
 end
 
-When /^round '(n*)' is executed$/ do |round_number|
-  puts round_number
-#  @blackjack.Dealer.deal
+When /^round 1 is executed$/ do 
+  @blackjack.next_round
 end
 
 Then /^each player has '(n*)' card face '(w*)'$/ do |card_status|
