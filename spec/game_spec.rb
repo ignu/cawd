@@ -7,7 +7,7 @@ describe Game do
       file_contents = ''
       IO.expects(:read).returns(file_contents)
       #Blackjack.expects(:parse).with(file_contents)  TODO: figure out how to test this
-      Game.load "blackjack"
+      GameFactory.load "blackjack"
     end
       
     it "subclass game based on the provided filename" do

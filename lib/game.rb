@@ -22,6 +22,9 @@ class Game
     @dealer = d
   end
 
+end
+class GameFactory
+    
   class << self
 
     @@code = ''
@@ -29,10 +32,12 @@ class Game
     def load(filename)
       file = File.join(File.dirname(__FILE__), '..', 'game_definitions', filename + '.card')
       filename.capitalize!
-      klass = Class.new(Game)
-      Object.const_set(filename, klass)
+      Object.const_set(filename, Game)
       klass = Object.const_get(filename)
       klass.parse(IO.read(file))
+      klass.define_method :parse do 
+        eval code 
+      end
     end
     
     def parse(code)
@@ -40,5 +45,4 @@ class Game
     end
    
   end # end class variables
-  
 end
