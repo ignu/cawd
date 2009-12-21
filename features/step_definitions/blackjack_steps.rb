@@ -1,7 +1,7 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "../../", "cawd"))
 
 Given /^the rules for 'blackjack'$/ do
-  Game.load 'blackjack'
+  GameFactory.load 'blackjack'
   @blackjack = Blackjack.new
 end
 

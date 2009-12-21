@@ -36,8 +36,9 @@ class Game
     code = IO.read(file)
     parse code
   end
-  
+
 end
+
 class GameFactory
     
   class << self
@@ -45,8 +46,7 @@ class GameFactory
     def load(filename)
       filename.capitalize!      
       klass = Class.new(Game)
-      Object.const_set(filename, klass)
-      klass = Object.const_get(filename)      
+      Object.const_set(filename, klass)     
     end  
    
   end # end class variables
