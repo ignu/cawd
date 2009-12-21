@@ -6,6 +6,7 @@ describe Game do
     before(:each) do
       file_contents = ''
       IO.expects(:read).returns(file_contents)
+      
       #Blackjack.expects(:parse).with(file_contents)  TODO: figure out how to test this
       GameFactory.load "blackjack"
     end
@@ -23,18 +24,21 @@ describe Game do
     end
     
     it "should be able to set the Dealer as a player or not" do
-      Argh.parse 'dealer.player = true'
+      stub_dsl_code('dealer.player = true')
       Argh.new.dealer.player?.should be true
-      Argh.parse 'dealer.player = false'
+      stub_dsl_code('dealer.player = false')
       Argh.new.dealer.player?.should be false
     end
     
     it "should be able to define actions for a round" do
-      Argh.parse 'add_round { @dealer = 3}'
+      stub_dsl_code('add_round { @dealer = 3}')
       game = Argh.new
       game.next_round
       game.dealer.should == 3
     end
-    
+  end
+  
+  def stub_dsl_code(code)
+    IO.expects(:read).returns(code)
   end
 end

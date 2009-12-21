@@ -6,8 +6,11 @@ class Game
   def initialize
     @rounds = []
     @dealer = Dealer.new
-    eval @@code
+    
+    load_external_code
   end
+  
+
   
   def add_round(&block)
     @rounds << block
@@ -22,27 +25,29 @@ class Game
     @dealer = d
   end
 
+  private
+  
+  def parse(code)
+    eval code
+  end
+  
+  def load_external_code
+    file = File.join(File.dirname(__FILE__), '..', 'game_definitions', self.class.to_s + '.card')
+    code = IO.read(file)
+    parse code
+  end
+  
 end
 class GameFactory
     
   class << self
-
-    @@code = ''
         
     def load(filename)
-      file = File.join(File.dirname(__FILE__), '..', 'game_definitions', filename + '.card')
-      filename.capitalize!
-      Object.const_set(filename, Game)
-      klass = Object.const_get(filename)
-      klass.parse(IO.read(file))
-      klass.define_method :parse do 
-        eval code 
-      end
-    end
-    
-    def parse(code)
-      @@code =code
-    end
+      filename.capitalize!      
+      klass = Class.new(Game)
+      Object.const_set(filename, klass)
+      klass = Object.const_get(filename)      
+    end  
    
   end # end class variables
 end
