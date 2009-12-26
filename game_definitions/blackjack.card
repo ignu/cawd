@@ -1,9 +1,9 @@
 dealer.player = false
 
 add_round do 
-  deal players 1.up
-  deal dealer 1.down
-  deal all 1.up
+  deal players, 1.up
+  deal dealer, 1.down
+  #deal all, 1.up
 end
 
 <<eos

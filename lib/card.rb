@@ -31,10 +31,20 @@ end
 
 class Fixnum
   def up
+    get_cards(self, :up)
+  end
+  
+  def down
+    get_cards(self, :down)
+  end
+  
+  private 
+  def get_cards(count, state)
     rv = []
-    self.times do
-      rv << UndealtCard.new(:up)
+    count.times do 
+      rv << UndealtCard.new(state)
     end
     rv
   end
+
 end

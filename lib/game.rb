@@ -1,10 +1,11 @@
 
 class Game 
   
-  attr_accessor :dealer
+  attr_accessor :dealer, :players
   
   def initialize
     @rounds = []
+    @players = []
     @dealer = Dealer.new
     
     load_external_code
@@ -21,6 +22,15 @@ class Game
   def dealer=(d)
     puts "dealer=called"
     @dealer = d
+  end
+  
+  def deal(players, cards)
+
+    return players.deal(cards) unless players.respond_to?(:each)
+    
+    players.each do |player|
+      player.deal cards
+    end
   end
 
   private

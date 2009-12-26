@@ -1,6 +1,20 @@
 require(File.join(File.dirname(__FILE__), '.', 'spec_helper'))
 
 describe Game do
+
+  it "should have an array of players" do
+    stub_dsl_code('')
+    Game.new.players.length.should be 0
+  end
+  
+  it "should be able to deal cards" do #TODO: this exposing too many internals?
+    stub_dsl_code('')
+    @game = Game.new
+    @game.players << Player.new
+    @game.players << Player.new    
+    @game.deal @game.players, 1.up
+    @game.players[0].cards.length.should be 1
+  end
   
   describe "loading a game from a file" do
     before(:each) do
