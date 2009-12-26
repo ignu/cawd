@@ -30,6 +30,6 @@ class Dealer < Player
   
   def initialize
     @player = false
-    @cards = [] unless !player?
+    @cards = [] #unless !player?
   end
 end
