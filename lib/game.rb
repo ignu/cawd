@@ -10,8 +10,6 @@ class Game
     load_external_code
   end
   
-
-  
   def add_round(&block)
     @rounds << block
   end

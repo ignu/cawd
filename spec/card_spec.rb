@@ -13,5 +13,10 @@ describe "Card" do
     Card.new('A', :spaces).value.should == 11
     
   end
+
+  it "can tell if a card is face up" do
+    2.up.length.should be 2
+    2.up.first.should be_kind_of(UndealtCard)
+  end
   
 end
