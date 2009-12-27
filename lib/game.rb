@@ -38,6 +38,10 @@ class Game
   def parse(code)
     eval code
   end
+
+  def all
+    @players.clone << @dealer
+  end
   
   def load_external_code
     file = File.join(File.dirname(__FILE__), '..', 'game_definitions', self.class.to_s + '.card')

@@ -2,19 +2,22 @@ require(File.join(File.dirname(__FILE__), '.', 'spec_helper'))
 
 describe Game do
 
-  it "should have an array of players" do
+  before(:each) do
     stub_dsl_code('')
-    Game.new.players.length.should be 0
+    @game = Game.new 
+    @game.players << Player.new
+    @game.players << Player.new   
   end
   
-  it "should be able to deal cards" do #TODO: this exposing too many internals?
-    stub_dsl_code('')
-    @game = Game.new
-    @game.players << Player.new
-    @game.players << Player.new    
+  it "should have an array of players" do
+    @game.players.length.should be 2
+  end
+  
+  it "should be able to deal cards" do #TODO: this exposing too many internals?  
     @game.deal @game.players, 1.up
     @game.players[0].cards.length.should be 1
   end
+  
   
   describe "loading a game from a file" do
     before(:each) do
@@ -50,6 +53,16 @@ describe Game do
       game.next_round
       game.dealer.should == 3
     end
+    
+    it "should be able to deal to all" do
+      stub_dsl_code('add_round { deal all, 2.up}')
+      game = Argh.new
+      game.players << Player.new
+      game.next_round
+      game.dealer.cards.count.should == 2
+      game.players.first.cards.count.should == 2
+    end
+    
   end
   
   def stub_dsl_code(code)
