@@ -5,14 +5,27 @@ Given /^the rules for 'blackjack'$/ do
   @blackjack = Blackjack.new
 end
 
-When /^round 1 is executed$/ do 
+When /^round 1 is executed$/ do
   @blackjack.next_round
 end
-
-Then /^each player has '(n*)' card face '(w*)'$/ do |card_status|
-  pending # express the regexp above with the code you wish you had
+Then /^each player has "([^\"]*)" cards face "([^\"]*)"$/ do |card_number, card_state|
+  count = 0 
+  @blackjack.players.each do |player|
+    player.cards.each do |card|
+      count = count+1 if (card.state = card_state.to_sym)
+    end
+  end
+  count.should == card_number.to_i
 end
 
-Then /^each player has '1' card face 'down'$/ do
-  pending # express the regexp above with the code you wish you had
+
+When /^the dealer has "([^\"]*)" cards face "([^\"]*)"$/ do |card_number, card_status|
+  matching_cards = @blackjack.dealer.cards.select {|c| c.state == card_status.to_sym}
+  matching_cards.count.should == card_number.to_i
+end
+
+When /^"([^\"]*)" player is added$/ do |player_count|
+  player_count.to_i.times do
+    @blackjack.players << Player.new
+  end
 end

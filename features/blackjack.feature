@@ -4,6 +4,8 @@ Feature: Blackjack rules
   I want the game dsl to be followed
 Scenario: Play Blackjack
 Given the rules for 'blackjack'
-When round 1 is executed
-Then each player has '1' card face 'up'
-And each player has '1' card face 'down'
+When "1" player is added
+And round 1 is executed
+Then each player has "2" cards face "up"
+And the dealer has "1" cards face "up"
+And the dealer has "1" cards face "down"
