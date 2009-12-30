@@ -1,6 +1,6 @@
 
 class Player
-  attr_accessor :cards
+  attr_accessor :cards, :stack
   
   def self.add_action(method_name, &block)
     define_method method_name, block
